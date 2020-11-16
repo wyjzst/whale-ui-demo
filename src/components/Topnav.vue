@@ -1,47 +1,44 @@
 <template>
-<div class="topnav">
-  <router-link to="/" class="logo">
-    <svg class="icon">
-      <use xlink:href="#icon-king"></use>
+  <div class="topnav">
+    <router-link to="/" class="logo">
+      <svg class="icon">
+        <use xlink:href="#icon-whale"></use>
+      </svg>
+    </router-link>
+    <ul class="menu">
+      <li>
+        <router-link to="/doc">文档</router-link>
+      </li>
+    </ul>
+    <svg v-if="toggleMenuButtonVisible" class="toggleAside" @click="toggleMenu">
+      <use xlink:href="#icon-menu"></use>
     </svg>
-  </router-link>
-  <ul class="menu">
-    <li>
-      <router-link to="/doc">文档</router-link>
-    </li>
-  </ul>
-  <svg v-if="toggleMenuButtonVisible" class="toggleAside" @click="toggleMenu">
-    <use xlink:href="#icon-menu"></use>
-  </svg>
-</div>
+  </div>
 </template>
 
 <script lang="ts">
-import {
-  inject,
-  Ref
-} from "vue";
+import { inject, Ref } from "vue";
 export default {
   props: {
     toggleMenuButtonVisible: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup() {
-    const menuVisible = inject < Ref < boolean >> ("menuVisible"); // get
+    const menuVisible = inject<Ref<boolean>>("menuVisible"); // get
     const toggleMenu = () => {
       menuVisible.value = !menuVisible.value;
     };
     return {
-      toggleMenu
+      toggleMenu,
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-$color: #007974;
+$color: #000000;
 
 .topnav {
   color: $color;
@@ -55,27 +52,27 @@ $color: #007974;
   justify-content: center;
   align-items: center;
 
-  >.logo {
+  > .logo {
     max-width: 6em;
     margin-right: auto;
 
-    >svg {
-      width: 32px;
-      height: 32px;
+    > svg {
+      width: 48px;
+      height: 48px;
     }
   }
 
-  >.menu {
+  > .menu {
     display: flex;
     white-space: nowrap;
     flex-wrap: nowrap;
 
-    >li {
+    > li {
       margin: 0 1em;
     }
   }
 
-  >.toggleAside {
+  > .toggleAside {
     width: 32px;
     height: 32px;
     position: absolute;
@@ -87,15 +84,15 @@ $color: #007974;
   }
 
   @media (max-width: 500px) {
-    >.menu {
+    > .menu {
       display: none;
     }
 
-    >.logo {
+    > .logo {
       margin: 0 auto;
     }
 
-    >.toggleAside {
+    > .toggleAside {
       display: inline-block;
     }
   }
